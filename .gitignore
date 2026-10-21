@@ -1,0 +1,7 @@
+# Mengabaikan file konfigurasi rahasia
+.env
+
+# Mengabaikan folder modul node dan hasil build
+node_modules/
+dist/
+build/
