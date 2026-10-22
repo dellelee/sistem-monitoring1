@@ -9,15 +9,15 @@ export default function Login({ setToken, setRole, setUserName }) {
   const [warningMsg, setWarningMsg] = useState('');
   const [cameraActive, setCameraActive] = useState(false);
 
-  const executeLogin = async (loginData, restartScannerCallback) => {
+ const executeLogin = async (loginData, restartScannerCallback) => {
     try {
-      // 🛠️ URL Dinamis untuk production (Vercel) dan development (lokal)
       const API_URL = window.location.hostname === 'localhost' 
         ? 'http://localhost:5000/api' 
-        : 'https://sistem-monitoring1.vercel.app/api';
+        : `${window.location.origin}/api`; // Otomatis menyesuaikan domain Vercel yang aktif
 
       const res = await axios.post(`${API_URL}/auth/login`, loginData);
-
+      // ... (kode selanjutnya dibiarkan sama)
+      
       const { token, role, name, assignments } = res.data;
 
       // Set State
