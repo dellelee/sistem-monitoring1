@@ -11,6 +11,10 @@ const bcrypt = require('bcryptjs');
 
 const app = express();
 app.use(cors());
+// Tambahkan baris ini agar root path tidak Cannot GET /
+app.get('/', (req, res) => {
+  res.send('API Sistem Monitoring Berjalan Normal');
+});
 
 // 🛠️ TAMBAHKAN LIMIT DI SINI (Contoh: 50mb untuk menampung file Excel & data besar)
 app.use(express.json({ limit: '50mb' }));
