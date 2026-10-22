@@ -11,7 +11,12 @@ export default function Login({ setToken, setRole, setUserName }) {
 
   const executeLogin = async (loginData, restartScannerCallback) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', loginData);
+      // 🛠️ URL Dinamis untuk production (Vercel) dan development (lokal)
+      const API_URL = window.location.hostname === 'localhost' 
+        ? 'http://localhost:5000/api' 
+        : 'https://sistem-monitoring1.vercel.app/api';
+
+      const res = await axios.post(`${API_URL}/auth/login`, loginData);
 
       const { token, role, name, assignments } = res.data;
 

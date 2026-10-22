@@ -41,7 +41,12 @@ export default function App() {
 
   const fetchStudents = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/students');
+      // 🛠️ URL Dinamis untuk production (Vercel) dan development (lokal)
+      const API_URL = window.location.hostname === 'localhost' 
+        ? 'http://localhost:5000/api' 
+        : 'https://sistem-monitoring1.vercel.app/api';
+
+      const res = await axios.get(`${API_URL}/students`);
       setStudents(res.data);
     } catch (err) {
       console.error('Gagal ambil data siswa:', err);
