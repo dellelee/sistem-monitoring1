@@ -5,9 +5,10 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// Koneksi ke MongoDB Atlas (menggunakan environment variable dari Vercel)
+// Koneksi ke MongoDB Atlas (Lazy Connection untuk Serverless)
 let isConnected = false;
 async function connectDB() {
   if (isConnected) return;
@@ -20,7 +21,8 @@ async function connectDB() {
   }
 }
 
-// Hubungkan rute backend yang sudah Anda miliki
+// ⚠️ SESUAIKAN PATH INI BERDASARKAN FOLDER ANDA
+// Karena folder 'backend' berada sejajar dengan folder 'api' di root utama:
 const authRoutes = require('../backend/routes/authRoutes');
 const soalRoutes = require('../backend/routes/soalRoutes');
 const studentRoutes = require('../backend/routes/studentRoutes');
